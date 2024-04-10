@@ -1,0 +1,101 @@
+@import "./base.scss";
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    touch-action: manipulation; /* Ensure better touch responsiveness */
+}
+
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    font-family: "Exo", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    user-select: none;
+}
+
+main {
+    width: 100%;
+    max-width: 1200px;
+    padding: 1rem;
+    margin: 0 auto;
+    position: relative;
+}
+
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Nunito", sans-serif;
+    font-weight: 500;
+}
+
+p,
+small,
+span {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.025rem;
+}
+
+button,
+textarea,
+select,
+option,
+label {
+    font-family: "Nunito", sans-serif;
+    transition: all 0.5s linear;
+    line-height: 1.1rem !important;
+}
+
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    height: auto; /* Ensure images and media adjust proportionally */
+}
+
+a {
+    text-decoration: none;
+    color: #000; /* Use a fallback color */
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+hr {
+    padding: 0 1rem;
+    margin: 2rem auto;
+    max-width: 700px;
+    border: none;
+    border-top: 1px solid $base-blue;
+}
+
+input {
+    font-family: "Nunito", sans-serif;
+}
