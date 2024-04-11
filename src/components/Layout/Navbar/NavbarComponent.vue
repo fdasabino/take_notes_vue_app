@@ -18,12 +18,12 @@ import "./NavbarComponent.scss";
                 <RouterLink
                     to="/"
                     active-class="active"
-                    ><BookOpenIcon /> Notes</RouterLink
+                    ><BookOpenIcon /> <span>Notes</span></RouterLink
                 >
                 <RouterLink
                     to="/stats"
                     active-class="active"
-                    ><PresentationChartBarIcon /> Stats</RouterLink
+                    ><PresentationChartBarIcon /> <span>Stats</span></RouterLink
                 >
             </div>
         </div>

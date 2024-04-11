@@ -6,7 +6,6 @@
     margin-bottom: 20px;
     position: relative;
     transition: all 0.3s;
-    cursor: pointer;
 
     &:hover {
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
@@ -31,7 +30,7 @@
             gap: 1rem;
 
             button {
-                @media (max-width: 768px) {
+                @media (max-width: 480px) {
                     svg {
                         width: 0.7rem !important;
                         height: 0.7rem !important;
