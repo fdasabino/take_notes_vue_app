@@ -4,6 +4,7 @@ import ButtonComponent from "@/components/Layout/Button/ButtonComponent.vue";
 import NoteCardComponent from "@/components/Layout/NoteCard/NoteCardComponent.vue";
 import { FaceFrownIcon, PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
+import { useToast } from "vue-toast-notification";
 import "./ViewNotes.scss";
 
 //refs
@@ -34,11 +35,20 @@ const notes = ref([
 ]);
 const newNote = ref("");
 const newNoteRef = ref();
+const $toast = useToast();
 
 // id generator
 const generateId = new Date().getTime().toString();
 
 // methods
+const openToast = (message: string, type: string) => {
+    $toast.open({
+        position: "bottom-left",
+        message: message,
+        type: type,
+    });
+};
+
 const addNote = (note: string) => {
     let createdNote = {
         id: generateId,
@@ -47,8 +57,9 @@ const addNote = (note: string) => {
     };
 
     notes.value.unshift(createdNote);
-    newNote.value = "";
 
+    newNote.value = "";
+    openToast("Note added successfully", "success");
     // focus on the input
     newNoteRef.value.focus();
 };
@@ -56,6 +67,7 @@ const addNote = (note: string) => {
 const deleteNote = (idToDelete: string) => {
     // filter out the note with the id passed to overwrite the notes ref
     notes.value = notes.value.filter((note) => note.id !== idToDelete);
+    openToast("Note deleted successfully", "info");
 };
 </script>
 
