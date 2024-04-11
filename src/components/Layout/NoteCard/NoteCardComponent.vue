@@ -51,7 +51,7 @@ const noteLength = computed(() => {
             <p>{{ props.content }}</p>
         </div>
         <div class="note_card__length">
-            <small>Length: {{ noteLength }}</small>
+            <small>{{ noteLength }} characters</small>
         </div>
     </div>
 </template>
