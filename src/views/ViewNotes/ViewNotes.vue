@@ -2,7 +2,7 @@
 // imports
 import ButtonComponent from "@/components/Layout/Button/ButtonComponent.vue";
 import NoteCardComponent from "@/components/Layout/NoteCard/NoteCardComponent.vue";
-import { PlusCircleIcon } from "@heroicons/vue/24/outline";
+import { FaceFrownIcon, PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
 import "./ViewNotes.scss";
 
@@ -52,6 +52,11 @@ const addNote = (note: string) => {
     // focus on the input
     newNoteRef.value.focus();
 };
+
+const deleteNote = (idToDelete: string) => {
+    // filter out the note with the id passed to overwrite the notes ref
+    notes.value = notes.value.filter((note) => note.id !== idToDelete);
+};
 </script>
 
 <template>
@@ -79,7 +84,16 @@ const addNote = (note: string) => {
                 :id="note.id"
                 :key="note.id"
                 :title="note.title"
-                :content="note.content" />
+                :content="note.content"
+                @deleteNote="deleteNote" />
+        </div>
+
+        <div
+            v-if="!notes.length"
+            class="notes__empty">
+            <FaceFrownIcon />
+            <p>Nothing to show here!!!</p>
+            <small>Start typing to add a note!!!</small>
         </div>
     </div>
 </template>

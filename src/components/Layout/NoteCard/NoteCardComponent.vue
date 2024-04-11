@@ -10,9 +10,11 @@ const props = defineProps<{
     id: string;
 }>();
 
+// emits
+const emit = defineEmits(["deleteNote", "editNote"]);
+
 const deleteNote = (id: string) => {
-    console.log("delete note", id);
-    // Emit an event to the parent component
+    emit("deleteNote", id);
 };
 
 const editNote = (id: string) => {

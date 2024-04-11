@@ -34,4 +34,36 @@
             grid-template-columns: 1fr;
         }
     }
+
+    &__empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+        border-radius: 1rem;
+        padding: 2rem;
+
+        p {
+            font-size: 1.5rem;
+            font-weight: 600;
+
+            @media (max-width: 768px) {
+                font-size: 1rem;
+                text-align: center;
+            }
+        }
+
+        small {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: $base-info;
+        }
+
+        svg {
+            width: 3rem;
+            height: 3rem;
+            fill: $base-dark-yellow;
+        }
+    }
 }
