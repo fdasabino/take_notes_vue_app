@@ -24,6 +24,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     user-select: none;
+    background: $base-bg-green;
 }
 
 main {
@@ -53,7 +54,6 @@ span {
     letter-spacing: 0.025rem;
 }
 
-button,
 textarea,
 select,
 option,
@@ -83,6 +83,7 @@ ul {
 }
 
 button {
+    font-family: "Quicksand", sans-serif;
     border: none;
     outline: none;
     cursor: pointer;

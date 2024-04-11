@@ -1,0 +1,11 @@
+.notes {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+        gap: 1rem;
+    }
+}
