@@ -4,6 +4,7 @@ import router from "./router";
 
 // Import global styles
 import "./assets/main.scss";
+import "./assets/input.scss";
 
 // Import views
 import App from "./App.vue";
