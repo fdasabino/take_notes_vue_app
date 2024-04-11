@@ -14,11 +14,13 @@ import "./ViewNotes.scss";
                 type="textarea"
                 placeholder="Enter your note..." />
 
-            <ButtonComponent
-                variant="primary"
-                @click="() => {}">
-                <PlusCircleIcon /> Add Note
-            </ButtonComponent>
+            <div class="notes__input__buttonContainer">
+                <ButtonComponent
+                    variant="tertiary"
+                    @click="() => {}">
+                    <PlusCircleIcon /> Add Note
+                </ButtonComponent>
+            </div>
         </div>
         <div class="notes__list">
             <NoteCardComponent
