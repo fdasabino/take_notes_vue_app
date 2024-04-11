@@ -12,7 +12,7 @@ import "./ViewNotes.scss";
         <div class="notes__input">
             <InputComponent
                 type="textarea"
-                placeholder="Enter your note..." />
+                placeholder="Add a new note..." />
 
             <div class="notes__input__buttonContainer">
                 <ButtonComponent
