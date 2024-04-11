@@ -24,7 +24,11 @@ const editNote = (id: string) => {
 <template>
     <div class="note_card">
         <div class="note_card__header">
-            <h3 class="note_card__title">{{ props.title }}</h3>
+            <div class="note_card__header__title">
+                <h3>
+                    {{ props.title }}
+                </h3>
+            </div>
             <div class="note_card__header__ctas">
                 <ButtonComponent
                     variant="danger"

@@ -34,13 +34,22 @@ const notes = ref([
     },
 ]);
 
-//refs
-const newNote = ref("fdsafdsfdfs");
-console.log(newNote.value);
-// methods
+// id generator
+const generateId = new Date().getTime().toString();
 
+//refs
+const newNote = ref("");
+
+// methods
 const addNote = (note: string) => {
-    console.log(note);
+    let createdNote = {
+        id: generateId,
+        title: `Date: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`,
+        content: note,
+    };
+
+    notes.value.unshift(createdNote);
+    newNote.value = "";
 };
 </script>
 
