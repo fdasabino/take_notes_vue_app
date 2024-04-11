@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
-import { defineProps } from "vue";
+import { computed, defineProps } from "vue";
 import ButtonComponent from "../Button/ButtonComponent.vue";
 import "./NoteCardComponent.scss";
 
@@ -19,6 +19,11 @@ const editNote = (id: string) => {
     console.log("edit note", id);
     // Emit an event to the parent component
 };
+
+// computed
+const noteLength = computed(() => {
+    return props.content.length;
+});
 </script>
 
 <template>
@@ -44,6 +49,9 @@ const editNote = (id: string) => {
         </div>
         <div class="note_card__content">
             <p>{{ props.content }}</p>
+        </div>
+        <div class="note_card__length">
+            <small>Length: {{ noteLength }}</small>
         </div>
     </div>
 </template>

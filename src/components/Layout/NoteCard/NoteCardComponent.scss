@@ -1,12 +1,12 @@
 @import "../../../assets/base.scss";
 
 .note_card {
+    position: relative;
     background-color: $base-light-teal;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
-    position: relative;
     transition: all 0.3s;
 
     &:hover {
@@ -73,5 +73,15 @@
         @media (max-width: 768px) {
             text-align: center;
         }
+    }
+
+    &__length {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 0.5rem 1rem;
+        border-radius: 0 0 0 10px;
+        font-size: 0.7rem;
+        text-transform: uppercase;
     }
 }
