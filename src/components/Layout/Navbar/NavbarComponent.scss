@@ -30,7 +30,9 @@
         border: 1px solid rgba($color: $base-violet, $alpha: 0.7);
 
         .active {
-            border-bottom: 2px solid $base-light-green;
+            border: 2px solid $base-light-green;
+            border-radius: 16px;
+            padding: 0.5rem;
         }
 
         @media screen and (max-width: 768px) {
