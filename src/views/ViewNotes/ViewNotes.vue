@@ -38,6 +38,10 @@ const notes = ref([
 const newNote = ref("fdsafdsfdfs");
 console.log(newNote.value);
 // methods
+
+const addNote = (note: string) => {
+    console.log(note);
+};
 </script>
 
 <template>
@@ -51,7 +55,8 @@ console.log(newNote.value);
             <div class="notes__input__buttonContainer">
                 <ButtonComponent
                     variant="tertiary"
-                    @click="() => {}">
+                    @click="addNote(newNote)"
+                    :disabled="newNote.length === 0">
                     <PlusCircleIcon /> Add Note
                 </ButtonComponent>
             </div>

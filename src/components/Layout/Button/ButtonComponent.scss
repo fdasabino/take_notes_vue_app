@@ -39,11 +39,7 @@
         cursor: not-allowed;
         touch-action: none;
         box-shadow: none;
-
-        &:hover {
-            transform: none;
-            pointer-events: none !important;
-        }
+        pointer-events: none;
     }
 
     @media (max-width: 768px) {
@@ -79,26 +75,10 @@
         background-color: $hoverColor;
         box-shadow: $base-shadow-3;
         color: $textHoverColor;
-
-        &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            touch-action: none;
-            box-shadow: none;
-
-            &:hover {
-                transform: none;
-                pointer-events: none !important;
-            }
-        }
     }
 
     &:active {
         transform: scale($activeScale);
-
-        &:disabled {
-            transform: none;
-        }
     }
 }
 
