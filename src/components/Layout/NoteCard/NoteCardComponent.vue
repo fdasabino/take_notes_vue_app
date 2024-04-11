@@ -22,11 +22,11 @@ const editNote = (id: string) => {
 
 // computed
 const noteLength = computed(() => {
-    const length: string =
+    const contentLength: string =
         props.content.length > 1
             ? `${props.content.length} characters`
             : `${props.content.length} character`;
-    return length;
+    return contentLength;
 });
 </script>
 
