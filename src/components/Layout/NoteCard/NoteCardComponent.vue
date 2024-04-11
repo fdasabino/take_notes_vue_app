@@ -22,7 +22,11 @@ const editNote = (id: string) => {
 
 // computed
 const noteLength = computed(() => {
-    return props.content.length;
+    const length: string =
+        props.content.length > 1
+            ? `${props.content.length} characters`
+            : `${props.content.length} character`;
+    return length;
 });
 </script>
 
@@ -51,9 +55,7 @@ const noteLength = computed(() => {
             <p>{{ props.content }}</p>
         </div>
         <div class="note_card__length">
-            <small
-                >{{ `${noteLength > 1 ? `${noteLength} characters` : `${noteLength} character`}` }}
-            </small>
+            <small>{{ noteLength }} </small>
         </div>
     </div>
 </template>
