@@ -2,6 +2,7 @@
 import { useStoreNotes } from "@/stores/storeNotes";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
 import { computed, defineProps } from "vue";
+import { useRouter } from "vue-router";
 import ButtonComponent from "../Button/ButtonComponent.vue";
 import "./NoteCardComponent.scss";
 
@@ -14,6 +15,9 @@ const props = defineProps<{
 // store
 const storeNotes = useStoreNotes();
 
+// route
+const route = useRouter();
+
 // computed
 const noteLength = computed(() => {
     const contentLength: string =
@@ -22,6 +26,10 @@ const noteLength = computed(() => {
             : `${props.content.length} character`;
     return contentLength;
 });
+
+const handleEditNote = (id: string) => {
+    route.push(`/edit/${id}`);
+};
 </script>
 
 <template>
@@ -35,12 +43,12 @@ const noteLength = computed(() => {
             <div class="note_card__header__ctas">
                 <ButtonComponent
                     variant="danger"
-                    @click="storeNotes.deleteNote(id)">
+                    @click="storeNotes.deleteNote(props.id)">
                     <TrashIcon /> <span>Delete</span>
                 </ButtonComponent>
                 <ButtonComponent
                     variant="primary"
-                    @click="storeNotes.editNote(id)">
+                    @click="handleEditNote(props.id)">
                     <PencilSquareIcon /> <span>Edit</span>
                 </ButtonComponent>
             </div>
