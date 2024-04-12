@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useStoreNotes } from "@/stores/storeNotes";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
 import { computed, defineProps } from "vue";
 import ButtonComponent from "../Button/ButtonComponent.vue";
@@ -10,17 +11,8 @@ const props = defineProps<{
     id: string;
 }>();
 
-// emits
-const emit = defineEmits(["deleteNote", "editNote"]);
-
-const deleteNote = (id: string) => {
-    emit("deleteNote", id);
-};
-
-const editNote = (id: string) => {
-    console.log("edit note", id);
-    // Emit an event to the parent component
-};
+// store
+const storeNotes = useStoreNotes();
 
 // computed
 const noteLength = computed(() => {
@@ -43,12 +35,12 @@ const noteLength = computed(() => {
             <div class="note_card__header__ctas">
                 <ButtonComponent
                     variant="danger"
-                    @click="deleteNote(id)">
+                    @click="storeNotes.deleteNote(id)">
                     <TrashIcon /> <span>Delete</span>
                 </ButtonComponent>
                 <ButtonComponent
                     variant="primary"
-                    @click="editNote(id)">
+                    @click="storeNotes.editNote(id)">
                     <PencilSquareIcon /> <span>Edit</span>
                 </ButtonComponent>
             </div>
