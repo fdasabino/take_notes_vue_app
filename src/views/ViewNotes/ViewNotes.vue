@@ -4,7 +4,7 @@ import ButtonComponent from "@/components/Layout/Button/ButtonComponent.vue";
 import NoteCardComponent from "@/components/Layout/NoteCard/NoteCardComponent.vue";
 import { useStoreNotes } from "@/stores/storeNotes";
 import { FaceFrownIcon, PlusCircleIcon } from "@heroicons/vue/24/outline";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import "./ViewNotes.scss";
 
 //refs
