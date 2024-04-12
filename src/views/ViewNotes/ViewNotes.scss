@@ -5,6 +5,10 @@
     flex-direction: column;
     gap: 3rem;
 
+    @media (max-width: 768px) {
+        gap: 1rem;
+    }
+
     &__info {
         display: flex;
         justify-content: center;
