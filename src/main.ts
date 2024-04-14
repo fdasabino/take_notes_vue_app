@@ -5,7 +5,6 @@ import router from "./router";
 
 // Import global styles
 import "vue-toast-notification/dist/theme-default.css";
-import "./assets/input.scss";
 import "./assets/main.scss";
 
 // Import views

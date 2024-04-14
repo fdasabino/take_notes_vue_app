@@ -1,5 +1,3 @@
-@import "./base.scss";
-
 * {
     padding: 0;
     margin: 0;
@@ -73,7 +71,7 @@ svg {
 
 a {
     text-decoration: none;
-    color: #000; /* Use a fallback color */
+    color: $base-dark; /* Use a fallback color */
 }
 
 ul {

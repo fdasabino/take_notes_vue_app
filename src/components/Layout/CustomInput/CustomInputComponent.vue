@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineEmits, defineProps, onUpdated, ref } from "vue";
+import "./CustomInput.scss";
 
 defineProps({
     modelValue: String,
