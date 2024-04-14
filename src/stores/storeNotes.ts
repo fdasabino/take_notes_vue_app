@@ -35,7 +35,6 @@ export const useStoreNotes = defineStore("storeNotes", {
         },
         updateNote(idToUpdate: string, content: string) {
             const note = this.notes.find((note) => note.id === idToUpdate);
-            console.log(note);
             if (note) {
                 note.content = content;
                 openToast("Note updated successfully...", "success");
