@@ -33,9 +33,22 @@ export const useStoreNotes = defineStore("storeNotes", {
             this.notes = this.notes.filter((note) => note.id !== idToDelete);
             openToast("Your note has been deleted successfully...", "info");
         },
-        editNote(idToEdit: string) {
-            console.log("edit note", idToEdit);
+        updateNote(idToUpdate: string, content: string) {
+            const note = this.notes.find((note) => note.id === idToUpdate);
+            console.log(note);
+            if (note) {
+                note.content = content;
+                openToast("Note updated successfully...", "success");
+            }
         },
     },
-    getters: {},
+    getters: {
+        getNotes(): Note[] {
+            return this.notes;
+        },
+
+        getNoteById: (state) => (id: string) => {
+            return state.notes.find((note) => note.id === id);
+        },
+    },
 });

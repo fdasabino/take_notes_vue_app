@@ -28,7 +28,7 @@ const updateNote = (value: string) => {
     newNote.value = value;
 };
 
-const computedMessage = computed((icon) => {
+const computedMessage = computed(() => {
     if (newNote.value.length === 0) return "Start typing above 👆";
     if (newNote.value.length > 1 && newNote.value.length < 49)
         return "Click the green button to add you note 👉";
