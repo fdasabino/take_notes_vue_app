@@ -1,2 +1,27 @@
-.editNote {
+.edit__note {
+    padding: 1rem;
+    border-radius: 1rem;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+
+        h3 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            color: $base-dark;
+
+            @media (max-width: 768px) {
+                font-size: 1.2rem;
+            }
+
+            @media (max-width: 480px) {
+                font-size: 1rem;
+            }
+        }
+    }
 }
