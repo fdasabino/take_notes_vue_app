@@ -5,13 +5,7 @@ import CustomInputComponent from "@/components/Layout/CustomInput/CustomInputCom
 import LoaderComponent from "@/components/Layout/Loader/LoaderComponent.vue";
 import NoteCardComponent from "@/components/Layout/NoteCard/NoteCardComponent.vue";
 import { useStoreNotes } from "@/stores/storeNotes";
-import {
-    ArrowDownIcon,
-    ArrowRightIcon,
-    ArrowUpIcon,
-    FaceFrownIcon,
-    PlusCircleIcon,
-} from "@heroicons/vue/24/outline";
+import { FaceFrownIcon, PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { computed, ref } from "vue";
 import "./ViewNotes.scss";
 
