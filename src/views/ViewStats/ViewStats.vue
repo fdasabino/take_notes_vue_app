@@ -16,7 +16,7 @@ const totalCharacters = computed(() => {
         <div class="stats__header">
             <h1>My Stats</h1>
             <img
-                src="../../assets/imgs/LOGO.webp"
+                src="../../assets/imgs/logo.png"
                 alt="logo" />
         </div>
 
