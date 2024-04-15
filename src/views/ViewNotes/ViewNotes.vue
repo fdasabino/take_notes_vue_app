@@ -2,6 +2,7 @@
 // imports
 import ButtonComponent from "@/components/Layout/Button/ButtonComponent.vue";
 import CustomInputComponent from "@/components/Layout/CustomInput/CustomInputComponent.vue";
+import LoaderComponent from "@/components/Layout/Loader/LoaderComponent.vue";
 import NoteCardComponent from "@/components/Layout/NoteCard/NoteCardComponent.vue";
 import { useStoreNotes } from "@/stores/storeNotes";
 import {
@@ -17,11 +18,17 @@ import "./ViewNotes.scss";
 // refs
 const storeNotes = useStoreNotes();
 const newNote = ref("");
+const loading = ref(false); // Make loading reactive
 
 // methods
 const addNote = (note: string) => {
     storeNotes.createNote(note);
-    newNote.value = "";
+    loading.value = true; // Start loading
+
+    setTimeout(() => {
+        loading.value = false; // Stop loading
+        newNote.value = "";
+    }, 2000);
 };
 
 const updateNote = (value: string) => {
@@ -38,6 +45,9 @@ const computedMessage = computed(() => {
 </script>
 
 <template>
+    <div v-show="loading">
+        <LoaderComponent />
+    </div>
     <div class="notes">
         <CustomInputComponent
             :modelValue="newNote"

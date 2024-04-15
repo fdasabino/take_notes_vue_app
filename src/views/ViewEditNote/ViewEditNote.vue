@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ButtonComponent from "@/components/Layout/Button/ButtonComponent.vue";
 import CustomInputComponent from "@/components/Layout/CustomInput/CustomInputComponent.vue";
+import LoaderComponent from "@/components/Layout/Loader/LoaderComponent.vue";
 import { useStoreNotes } from "@/stores/storeNotes";
 import { BackwardIcon, FolderIcon } from "@heroicons/vue/24/outline";
 import { computed, ref } from "vue";
@@ -10,6 +11,7 @@ import "./ViewEditNote.scss";
 const { getNoteById, updateNote } = useStoreNotes();
 const route = useRoute();
 const router = useRouter();
+const loading = ref(false); // Make loading reactive
 
 const note = computed(() => {
     return getNoteById(route.params.id as string);
@@ -22,12 +24,21 @@ const sendMeBack = () => {
 };
 
 const saveNote = () => {
-    updateNote(note.value?.id as string, noteContent.value);
-    sendMeBack();
+    if (note.value?.id && noteContent.value) {
+        loading.value = true; // Start loading
+        updateNote(note.value.id, noteContent.value);
+        setTimeout(() => {
+            loading.value = false; // Stop loading
+            sendMeBack();
+        }, 2000);
+    }
 };
 </script>
 
 <template>
+    <div v-show="loading">
+        <LoaderComponent />
+    </div>
     <div class="edit__note">
         <div class="edit__note__header">
             <h3>Edit Note</h3>
