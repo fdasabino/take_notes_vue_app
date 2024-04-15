@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { vAutoFocus } from "@/directives/vAutofocus";
 import { defineEmits, defineProps, onUpdated, ref } from "vue";
 import "./CustomInput.scss";
 
@@ -29,7 +30,8 @@ onUpdated(() => {
                 ref="textareaRef"
                 :value="modelValue"
                 @input="handleInput"
-                :placeholder="placeholder" />
+                :placeholder="placeholder"
+                v-auto-focus />
         </div>
 
         <div class="notes__input__buttonContainer">

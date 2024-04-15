@@ -1,18 +1,8 @@
+import { openToast } from "@/directives/openToast";
 import type { Note } from "@/types/types";
 import { defineStore } from "pinia";
-import { useToast } from "vue-toast-notification";
 
 const title = `Date: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`;
-const $toast = useToast();
-
-const openToast = (message: string, type: string) => {
-    $toast.open({
-        position: "bottom",
-        message: message,
-        type: type,
-    });
-};
-
 export const useStoreNotes = defineStore("storeNotes", {
     state: () => ({
         notes: [] as Note[],
