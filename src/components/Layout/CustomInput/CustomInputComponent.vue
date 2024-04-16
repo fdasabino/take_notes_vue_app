@@ -27,11 +27,13 @@ onUpdated(() => {
     <div class="notes__input">
         <div class="form_input">
             <textarea
+                maxlength="100"
                 ref="textareaRef"
                 :value="modelValue"
                 @input="handleInput"
                 :placeholder="placeholder"
                 v-auto-focus />
+            <span>{{ modelValue?.length }} / 100</span>
         </div>
 
         <div class="notes__input__buttonContainer">

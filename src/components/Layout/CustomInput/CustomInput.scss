@@ -26,6 +26,13 @@
         outline: 1px solid $base-light-green;
     }
 
+    span {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        font-size: 0.7rem;
+    }
+
     textarea {
         background-color: transparent;
         border: none;

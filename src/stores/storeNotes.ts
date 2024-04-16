@@ -1,8 +1,8 @@
+import { getDateAndTime } from "@/directives/getDateAndTime";
 import { openToast } from "@/directives/openToast";
 import type { Note } from "@/types/types";
 import { defineStore } from "pinia";
 
-const title = `Date: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`;
 export const useStoreNotes = defineStore("storeNotes", {
     state: () => ({
         notes: [] as Note[],
@@ -12,7 +12,7 @@ export const useStoreNotes = defineStore("storeNotes", {
             const generateId = new Date().getTime().toString();
             const note = {
                 id: generateId,
-                title,
+                title: getDateAndTime(),
                 content,
             };
 
