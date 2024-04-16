@@ -34,7 +34,7 @@ const computedMessage = computed(() => {
     if (newNote.value.length > 1 && newNote.value.length < 49)
         return "Click the green button to add you note 👉";
     if (newNote.value.length > 50)
-        return "Woah!!! Thats lot to remember, don't forget to save it 😊💡";
+        return "Woo!!! Thats lot to remember, don't forget to save it 😊💡";
 });
 </script>
 
