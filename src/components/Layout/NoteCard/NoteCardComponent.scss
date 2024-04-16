@@ -57,15 +57,18 @@
             }
         }
     }
-    &__content {
-        width: 100%;
-        max-width: 100%;
-        height: fit-content;
-        color: #666;
-        margin: 1rem 0;
-        overflow: hidden;
-        text-align: justify;
+    .note_card__content {
+        overflow-x: hidden;
+        word-wrap: break-word;
+        padding: 0.8rem;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+        border: solid 1px $base-dark-grey;
+
         p {
+            font-weight: 500;
             font-size: 0.8rem;
             letter-spacing: 0px;
 
