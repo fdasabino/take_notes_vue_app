@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useStoreNotes } from "@/stores/storeNotes";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
-import { onClickOutside } from "@vueuse/core";
-import { computed, defineProps, onMounted, ref } from "vue";
+import { computed, defineProps, ref } from "vue";
 import { useRouter } from "vue-router";
 import ButtonComponent from "../Button/ButtonComponent.vue";
 import DeleteModalComponent from "../Modal/DeleteModalComponent.vue";
 import "./NoteCardComponent.scss";
 
+// props
 const props = defineProps<{
     title: string;
     content: string;
@@ -24,14 +24,21 @@ const storeNotes = useStoreNotes();
 const route = useRouter();
 
 // methods
-
 const openModal = () => {
     showModal.value = true;
+};
+
+const closeModal = () => {
+    showModal.value = false;
 };
 
 const deleteItem = (id: string) => {
     storeNotes.deleteNote(id);
     showModal.value = false;
+};
+
+const handleEditNote = (id: string) => {
+    route.push(`/edit/${id}`);
 };
 
 // computed
@@ -42,16 +49,13 @@ const noteLength = computed(() => {
             : `${props.content.length} character`;
     return contentLength;
 });
-
-const handleEditNote = (id: string) => {
-    route.push(`/edit/${id}`);
-};
 </script>
 
 <template>
     <div class="note_card">
         <DeleteModalComponent
-            v-if="showModal"
+            :showModal="showModal"
+            :closeModal="closeModal"
             :id="props.id"
             :deleteFunction="deleteItem">
         </DeleteModalComponent>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref } from "vue";
+import { defineProps } from "vue";
 import ButtonComponent from "../Button/ButtonComponent.vue";
 import "./DeleteModal.scss";
 
@@ -8,29 +8,29 @@ const props = defineProps({
         type: [String, Number],
         required: true,
     },
+    showModal: {
+        type: Boolean,
+        required: true,
+    },
     deleteFunction: {
+        type: Function,
+        required: true,
+    },
+    closeModal: {
         type: Function,
         required: true,
     },
 });
 
-const isVisible = ref(true);
-const modal = ref<HTMLElement | null>(null);
-
-const closeModal = () => {
-    isVisible.value = false;
-};
-
 const handleDelete = () => {
     props.deleteFunction(props.id);
-    closeModal();
+    props.closeModal();
 };
 </script>
 
 <template>
     <div
-        v-if="isVisible"
-        ref="modal"
+        v-if="props.showModal"
         class="modal">
         <div class="modal__content">
             <div class="modal__content__header">
@@ -39,15 +39,15 @@ const handleDelete = () => {
             </div>
             <div class="modal__content__body">
                 <ButtonComponent
-                    variant="danger"
-                    @click="handleDelete"
-                    >Delete</ButtonComponent
-                >
-                <ButtonComponent
                     variant="primary"
-                    @click="closeModal"
-                    >Cancel</ButtonComponent
-                >
+                    @click="$props.closeModal">
+                    Cancel
+                </ButtonComponent>
+                <ButtonComponent
+                    variant="danger"
+                    @click="handleDelete">
+                    Delete
+                </ButtonComponent>
             </div>
         </div>
     </div>
