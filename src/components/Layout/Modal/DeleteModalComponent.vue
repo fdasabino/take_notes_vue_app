@@ -34,8 +34,8 @@ const handleDelete = () => {
         class="modal">
         <div class="modal__content">
             <div class="modal__content__header">
-                <h2>Delete Item</h2>
-                <p>Are you sure you want to delete this item?</p>
+                <h2>Delete Note</h2>
+                <p>Are you sure you want to delete this note?</p>
             </div>
             <div class="modal__content__body">
                 <ButtonComponent
