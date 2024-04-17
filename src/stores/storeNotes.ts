@@ -2,8 +2,6 @@ import { getDateAndTime } from "@/directives/getDateAndTime";
 import { openToast } from "@/directives/openToast";
 import { db } from "@/firebase/firebase";
 import type { Note } from "@/types/types";
-import { defineStore } from "pinia";
-
 import {
     collection,
     deleteDoc,
@@ -14,6 +12,8 @@ import {
     setDoc,
     updateDoc,
 } from "firebase/firestore";
+import { defineStore } from "pinia";
+import { v4 as uuidv4 } from "uuid";
 
 const notesCollection = collection(db, "notes");
 const notesCollectionQuery = query(notesCollection, orderBy("id", "desc"));
@@ -39,7 +39,7 @@ export const useStoreNotes = defineStore("storeNotes", {
             });
         },
         async createNote(content: string) {
-            const generateId = new Date().getTime().toString();
+            const generateId = uuidv4();
             await setDoc(doc(notesCollection, generateId), {
                 id: generateId,
                 title: getDateAndTime(),
