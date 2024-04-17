@@ -25,6 +25,7 @@ export const useStoreNotes = defineStore("storeNotes", {
     // initial state
     state: () => ({
         notes: [] as Note[],
+        loading: false,
     }),
     actions: {
         // get

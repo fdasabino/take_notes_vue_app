@@ -12,14 +12,13 @@ import "./ViewNotes.scss";
 // refs
 const storeNotes = useStoreNotes();
 const newNote = ref("");
-const loading = ref(false); // Make loading reactive
 
 // methods
 const addNote = (note: string) => {
-    loading.value = true; // Start loading
+    storeNotes.loading = true; // Start loading
 
     const timeout = setTimeout(() => {
-        loading.value = false; // Stop loading
+        storeNotes.loading = false; // Stop loading
         newNote.value = "";
         storeNotes.createNote(note);
     }, 2000);
@@ -41,7 +40,7 @@ const computedMessage = computed(() => {
 </script>
 
 <template>
-    <div v-show="loading">
+    <div v-show="storeNotes.loading">
         <LoaderComponent />
     </div>
     <div class="notes">

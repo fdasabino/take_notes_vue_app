@@ -15,12 +15,11 @@ const props = defineProps<{
     id: string | number;
 }>();
 
-// refs
-const showModal = ref(false);
-const loading = ref(false);
-
 // store
 const storeNotes = useStoreNotes();
+
+// refs
+const showModal = ref(false);
 
 // route
 const route = useRouter();
@@ -36,10 +35,10 @@ const closeModal = () => {
 
 const deleteItem = (id: string) => {
     showModal.value = false;
-    loading.value = true; // Start loading
+    storeNotes.loading = true; // Start loading
 
     const timeout = setTimeout(() => {
-        loading.value = false; // Stop loading
+        storeNotes.loading = false; // Stop loading
         storeNotes.deleteNote(id);
     }, 2000);
 
@@ -61,7 +60,7 @@ const noteLength = computed(() => {
 </script>
 
 <template>
-    <div v-show="loading">
+    <div v-show="storeNotes.loading">
         <LoaderComponent />
     </div>
     <div class="note_card">

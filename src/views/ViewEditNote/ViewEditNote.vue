@@ -8,13 +8,12 @@ import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import "./ViewEditNote.scss";
 
-const { getNoteById, updateNote } = useStoreNotes();
+const storeNotes = useStoreNotes();
 const route = useRoute();
 const router = useRouter();
-const loading = ref(false); // Make loading reactive
 
 const note = computed(() => {
-    return getNoteById(route.params.id as string);
+    return storeNotes.getNoteById(route.params.id as string);
 });
 
 const noteContent = ref(note.value?.content || "");
@@ -24,11 +23,11 @@ const sendMeBack = () => {
 };
 
 const saveNote = () => {
-    loading.value = true; // Start loading
+    storeNotes.loading = true; // Start loading
     const timeout = setTimeout(() => {
         if (note.value?.id && noteContent.value) {
-            loading.value = false; // Stop loading
-            updateNote(note.value.id, noteContent.value);
+            storeNotes.loading = false; // Stop loading
+            storeNotes.updateNote(note.value.id, noteContent.value);
             sendMeBack();
         }
     }, 2000);
@@ -38,7 +37,7 @@ const saveNote = () => {
 </script>
 
 <template>
-    <div v-show="loading">
+    <div v-show="storeNotes.loading">
         <LoaderComponent />
     </div>
     <div class="edit__note">
