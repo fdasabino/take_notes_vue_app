@@ -2,7 +2,7 @@ import { getDateAndTime } from "@/directives/getDateAndTime";
 import { openToast } from "@/directives/openToast";
 import { db } from "@/firebase/firebase";
 import type { Note } from "@/types/types";
-import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
 import { defineStore } from "pinia";
 
 const notesCollection = collection(db, "notes");
@@ -36,8 +36,8 @@ export const useStoreNotes = defineStore("storeNotes", {
             });
             openToast("Note added successfully...", "success");
         },
-        deleteNote(idToDelete: string) {
-            this.notes = this.notes.filter((note) => note.id !== idToDelete);
+        async deleteNote(idToDelete: string) {
+            await deleteDoc(doc(notesCollection, idToDelete));
             openToast("Your note has been deleted successfully...", "info");
         },
         updateNote(idToUpdate: string, content: string) {
