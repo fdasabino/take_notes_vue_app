@@ -4,6 +4,7 @@ import { PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
 import { computed, defineProps, ref } from "vue";
 import { useRouter } from "vue-router";
 import ButtonComponent from "../Button/ButtonComponent.vue";
+import LoaderComponent from "../Loader/LoaderComponent.vue";
 import DeleteModalComponent from "../Modal/DeleteModalComponent.vue";
 import "./NoteCardComponent.scss";
 
@@ -16,6 +17,7 @@ const props = defineProps<{
 
 // refs
 const showModal = ref(false);
+const loading = ref(false);
 
 // store
 const storeNotes = useStoreNotes();
@@ -33,8 +35,13 @@ const closeModal = () => {
 };
 
 const deleteItem = (id: string) => {
-    storeNotes.deleteNote(id);
     showModal.value = false;
+    loading.value = true; // Start loading
+
+    setTimeout(() => {
+        loading.value = false; // Stop loading
+        storeNotes.deleteNote(id);
+    }, 2000);
 };
 
 const handleEditNote = (id: string) => {
@@ -52,6 +59,9 @@ const noteLength = computed(() => {
 </script>
 
 <template>
+    <div v-show="loading">
+        <LoaderComponent />
+    </div>
     <div class="note_card">
         <DeleteModalComponent
             :showModal="showModal"

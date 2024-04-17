@@ -24,14 +24,14 @@ const sendMeBack = () => {
 };
 
 const saveNote = () => {
-    if (note.value?.id && noteContent.value) {
-        loading.value = true; // Start loading
-        updateNote(note.value.id, noteContent.value);
-        setTimeout(() => {
+    loading.value = true; // Start loading
+    setTimeout(() => {
+        if (note.value?.id && noteContent.value) {
             loading.value = false; // Stop loading
+            updateNote(note.value.id, noteContent.value);
             sendMeBack();
-        }, 2000);
-    }
+        }
+    }, 2000);
 };
 </script>
 

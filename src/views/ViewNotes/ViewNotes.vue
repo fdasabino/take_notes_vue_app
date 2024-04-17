@@ -16,12 +16,12 @@ const loading = ref(false); // Make loading reactive
 
 // methods
 const addNote = (note: string) => {
-    storeNotes.createNote(note);
     loading.value = true; // Start loading
 
     setTimeout(() => {
         loading.value = false; // Stop loading
         newNote.value = "";
+        storeNotes.createNote(note);
     }, 2000);
 };
 
