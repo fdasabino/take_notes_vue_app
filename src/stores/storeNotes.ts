@@ -18,7 +18,7 @@ import {
 
 const notesCollection = collection(db, "notes");
 
-// title is the date and time of the note
+// "title" is the date and time of the note saved in the database
 const notesCollectionQuery = query(notesCollection, orderBy("title", "desc"));
 
 export const useStoreNotes = defineStore("storeNotes", {

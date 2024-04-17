@@ -1,4 +1,4 @@
 export const getDateAndTime = () => {
-    const title = `Date: ${new Date().toLocaleDateString()} @ ${new Date().toLocaleTimeString()}`;
-    return title;
+    const date = `Date: ${new Date().toLocaleDateString()} @ ${new Date().toLocaleTimeString()}`;
+    return date;
 };
