@@ -30,19 +30,30 @@ export const useStoreNotes = defineStore("storeNotes", {
     actions: {
         // get
         async getNotes() {
-            onSnapshot(notesCollectionQuery, (items) => {
-                let tempNotes = [] as Note[];
+            this.loading = true;
+            try {
+                onSnapshot(notesCollectionQuery, (items) => {
+                    let tempNotes = [] as Note[];
 
-                items.forEach((item) => {
-                    const note = {
-                        id: item.id,
-                        title: item.data().title,
-                        content: item.data().content,
-                    };
-                    tempNotes.push(note as Note);
+                    items.forEach((item) => {
+                        const note = {
+                            id: item.id,
+                            title: item.data().title,
+                            content: item.data().content,
+                        };
+                        tempNotes.push(note as Note);
+                    });
+                    this.notes = tempNotes;
+                    this.loading = false;
                 });
-                this.notes = tempNotes;
-            });
+            } catch (error: Error | any) {
+                openToast(error.message, "error");
+            } finally {
+                const timeout = setTimeout(() => {
+                    this.loading = false;
+                }, 1000);
+                return () => clearTimeout(timeout);
+            }
         },
         // create
         async createNote(content: string) {
