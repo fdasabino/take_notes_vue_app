@@ -9,7 +9,7 @@ import "./NoteCardComponent.scss";
 
 // props
 const props = defineProps<{
-    title: string;
+    title?: string;
     content: string;
     id: string;
 }>();

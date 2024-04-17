@@ -1,6 +1,8 @@
 import { getDateAndTime } from "@/directives/getDateAndTime";
 import { openToast } from "@/directives/openToast";
+import { db } from "@/firebase/firebase";
 import type { Note } from "@/types/types";
+import { collection, onSnapshot } from "firebase/firestore";
 import { defineStore } from "pinia";
 
 export const useStoreNotes = defineStore("storeNotes", {
@@ -8,6 +10,20 @@ export const useStoreNotes = defineStore("storeNotes", {
         notes: [] as Note[],
     }),
     actions: {
+        async getNotes() {
+            onSnapshot(collection(db, "notes"), (items) => {
+                let tempNotes = [] as Note[];
+                items.forEach((item) => {
+                    const note = {
+                        id: item.id,
+                        content: item.data().content,
+                    };
+                    tempNotes.push(note as Note);
+                });
+
+                this.notes = tempNotes;
+            });
+        },
         createNote(content: string) {
             const generateId = new Date().getTime().toString();
             const note = {
