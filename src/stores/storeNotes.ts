@@ -2,7 +2,7 @@ import { getDateAndTime } from "@/directives/getDateAndTime";
 import { openToast } from "@/directives/openToast";
 import { db } from "@/firebase/firebase";
 import type { Note } from "@/types/types";
-import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { defineStore } from "pinia";
 
 const notesCollection = collection(db, "notes");
@@ -15,6 +15,7 @@ export const useStoreNotes = defineStore("storeNotes", {
         async getNotes() {
             onSnapshot(notesCollection, (items) => {
                 let tempNotes = [] as Note[];
+
                 items.forEach((item) => {
                     const note = {
                         id: item.id,
@@ -23,7 +24,6 @@ export const useStoreNotes = defineStore("storeNotes", {
                     };
                     tempNotes.push(note as Note);
                 });
-
                 this.notes = tempNotes;
             });
         },
@@ -33,19 +33,33 @@ export const useStoreNotes = defineStore("storeNotes", {
                 id: generateId,
                 title: getDateAndTime(),
                 content,
-            });
-            openToast("Note added successfully...", "success");
+            })
+                .then(() => {
+                    openToast("Note added successfully...", "success");
+                })
+                .catch((error) => {
+                    openToast(error.message, "error");
+                });
         },
         async deleteNote(idToDelete: string) {
-            await deleteDoc(doc(notesCollection, idToDelete));
-            openToast("Your note has been deleted successfully...", "info");
+            await deleteDoc(doc(notesCollection, idToDelete))
+                .then(() => {
+                    openToast("Your note has been deleted successfully...", "info");
+                })
+                .catch((error) => {
+                    openToast(error.message, "error");
+                });
         },
-        updateNote(idToUpdate: string, content: string) {
-            const note = this.notes.find((note) => note.id === idToUpdate);
-            if (note) {
-                note.content = content;
-                openToast("Note updated successfully...", "success");
-            }
+        async updateNote(idToUpdate: string, content: string) {
+            await updateDoc(doc(notesCollection, idToUpdate), {
+                content,
+            })
+                .then(() => {
+                    openToast("Note updated successfully...", "success");
+                })
+                .catch((error) => {
+                    openToast(error.message, "error");
+                });
         },
     },
     getters: {
