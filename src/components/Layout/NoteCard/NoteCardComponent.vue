@@ -11,7 +11,7 @@ import "./NoteCardComponent.scss";
 const props = defineProps<{
     title?: string;
     content: string;
-    id: string;
+    id: string | number;
 }>();
 
 // refs
@@ -73,7 +73,7 @@ const noteLength = computed(() => {
                 </ButtonComponent>
                 <ButtonComponent
                     variant="primary"
-                    @click="handleEditNote(props.id)">
+                    @click="handleEditNote(props.id as string)">
                     <PencilSquareIcon /> <span>Edit</span>
                 </ButtonComponent>
             </div>

@@ -2,8 +2,10 @@ import { getDateAndTime } from "@/directives/getDateAndTime";
 import { openToast } from "@/directives/openToast";
 import { db } from "@/firebase/firebase";
 import type { Note } from "@/types/types";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
 import { defineStore } from "pinia";
+
+const notesCollection = collection(db, "notes");
 
 export const useStoreNotes = defineStore("storeNotes", {
     state: () => ({
@@ -11,11 +13,12 @@ export const useStoreNotes = defineStore("storeNotes", {
     }),
     actions: {
         async getNotes() {
-            onSnapshot(collection(db, "notes"), (items) => {
+            onSnapshot(notesCollection, (items) => {
                 let tempNotes = [] as Note[];
                 items.forEach((item) => {
                     const note = {
                         id: item.id,
+                        title: item.data().title,
                         content: item.data().content,
                     };
                     tempNotes.push(note as Note);
@@ -24,15 +27,13 @@ export const useStoreNotes = defineStore("storeNotes", {
                 this.notes = tempNotes;
             });
         },
-        createNote(content: string) {
+        async createNote(content: string) {
             const generateId = new Date().getTime().toString();
-            const note = {
+            await setDoc(doc(notesCollection, generateId), {
                 id: generateId,
                 title: getDateAndTime(),
                 content,
-            };
-
-            this.notes.unshift(note);
+            });
             openToast("Note added successfully...", "success");
         },
         deleteNote(idToDelete: string) {
