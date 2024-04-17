@@ -2,6 +2,9 @@ import { getDateAndTime } from "@/directives/getDateAndTime";
 import { openToast } from "@/directives/openToast";
 import { db } from "@/firebase/firebase";
 import type { Note } from "@/types/types";
+import { defineStore } from "pinia";
+import { v4 as uuidv4 } from "uuid";
+
 import {
     collection,
     deleteDoc,
@@ -12,17 +15,19 @@ import {
     setDoc,
     updateDoc,
 } from "firebase/firestore";
-import { defineStore } from "pinia";
-import { v4 as uuidv4 } from "uuid";
 
 const notesCollection = collection(db, "notes");
-const notesCollectionQuery = query(notesCollection, orderBy("id", "desc"));
+
+// title is the date and time of the note
+const notesCollectionQuery = query(notesCollection, orderBy("title", "desc"));
 
 export const useStoreNotes = defineStore("storeNotes", {
+    // initial state
     state: () => ({
         notes: [] as Note[],
     }),
     actions: {
+        // get
         async getNotes() {
             onSnapshot(notesCollectionQuery, (items) => {
                 let tempNotes = [] as Note[];
@@ -38,6 +43,7 @@ export const useStoreNotes = defineStore("storeNotes", {
                 this.notes = tempNotes;
             });
         },
+        // create
         async createNote(content: string) {
             const generateId = uuidv4();
             await setDoc(doc(notesCollection, generateId), {
@@ -52,6 +58,7 @@ export const useStoreNotes = defineStore("storeNotes", {
                     openToast(error.message, "error");
                 });
         },
+        // delete
         async deleteNote(idToDelete: string) {
             await deleteDoc(doc(notesCollection, idToDelete))
                 .then(() => {
@@ -61,6 +68,7 @@ export const useStoreNotes = defineStore("storeNotes", {
                     openToast(error.message, "error");
                 });
         },
+        // update
         async updateNote(idToUpdate: string, content: string) {
             await updateDoc(doc(notesCollection, idToUpdate), {
                 content,
