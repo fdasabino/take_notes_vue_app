@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { vOnClickOutside, vOnKeyStroke } from "@vueuse/components";
+import { vOnClickOutside } from "@vueuse/components";
 import { onKeyStroke } from "@vueuse/core";
 import { defineProps } from "vue";
 import ButtonComponent from "../Button/ButtonComponent.vue";
@@ -12,6 +12,7 @@ const props = defineProps({
     },
     showModal: {
         type: Boolean,
+        default: false,
         required: true,
     },
     deleteFunction: {
@@ -30,14 +31,15 @@ const handleDelete = () => {
 };
 
 onKeyStroke("Escape", () => {
-    props.closeModal();
+    if (props.showModal) {
+        props.closeModal();
+    }
 });
 </script>
 
 <template>
     <div
         v-if="props.showModal"
-        ref="modal"
         class="modal">
         <div
             class="modal__content"
