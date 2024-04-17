@@ -2,10 +2,21 @@ import { getDateAndTime } from "@/directives/getDateAndTime";
 import { openToast } from "@/directives/openToast";
 import { db } from "@/firebase/firebase";
 import type { Note } from "@/types/types";
-import { collection, deleteDoc, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { defineStore } from "pinia";
 
+import {
+    collection,
+    deleteDoc,
+    doc,
+    onSnapshot,
+    orderBy,
+    query,
+    setDoc,
+    updateDoc,
+} from "firebase/firestore";
+
 const notesCollection = collection(db, "notes");
+const notesCollectionQuery = query(notesCollection, orderBy("id", "desc"));
 
 export const useStoreNotes = defineStore("storeNotes", {
     state: () => ({
@@ -13,7 +24,7 @@ export const useStoreNotes = defineStore("storeNotes", {
     }),
     actions: {
         async getNotes() {
-            onSnapshot(notesCollection, (items) => {
+            onSnapshot(notesCollectionQuery, (items) => {
                 let tempNotes = [] as Note[];
 
                 items.forEach((item) => {
