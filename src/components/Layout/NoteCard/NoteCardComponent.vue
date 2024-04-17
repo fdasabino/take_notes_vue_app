@@ -38,10 +38,12 @@ const deleteItem = (id: string) => {
     showModal.value = false;
     loading.value = true; // Start loading
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
         loading.value = false; // Stop loading
         storeNotes.deleteNote(id);
     }, 2000);
+
+    return () => clearTimeout(timeout);
 };
 
 const handleEditNote = (id: string) => {

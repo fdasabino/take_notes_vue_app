@@ -25,13 +25,15 @@ const sendMeBack = () => {
 
 const saveNote = () => {
     loading.value = true; // Start loading
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
         if (note.value?.id && noteContent.value) {
             loading.value = false; // Stop loading
             updateNote(note.value.id, noteContent.value);
             sendMeBack();
         }
     }, 2000);
+
+    return () => clearTimeout(timeout);
 };
 </script>
 

@@ -18,11 +18,13 @@ const loading = ref(false); // Make loading reactive
 const addNote = (note: string) => {
     loading.value = true; // Start loading
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
         loading.value = false; // Stop loading
         newNote.value = "";
         storeNotes.createNote(note);
     }, 2000);
+
+    return () => clearTimeout(timeout);
 };
 
 const updateNote = (value: string) => {
