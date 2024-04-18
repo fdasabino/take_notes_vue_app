@@ -10,7 +10,6 @@ const activeTab = ref(0);
 const storeAuth = useStoreAuth();
 
 const setActiveTab = (tab: number) => {
-    console.log(tab);
     activeTab.value = tab;
 };
 
