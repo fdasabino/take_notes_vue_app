@@ -20,6 +20,7 @@ import {
 
 let notesCollection = null as any;
 let notesCollectionQuery = null as any;
+let getNotesSnapShot = null as any;
 
 export const useStoreNotes = defineStore("storeNotes", {
     // initial state
@@ -40,7 +41,12 @@ export const useStoreNotes = defineStore("storeNotes", {
         async getNotes() {
             this.loading = true;
             try {
-                onSnapshot(notesCollectionQuery, (items: any) => {
+                // unsubscribe from previous snapshot so that we don't have multiple listeners
+                if (getNotesSnapShot) {
+                    getNotesSnapShot();
+                }
+
+                getNotesSnapShot = onSnapshot(notesCollectionQuery, (items: any) => {
                     let tempNotes = [] as Note[];
                     items.forEach((item: any) => {
                         const note = {
