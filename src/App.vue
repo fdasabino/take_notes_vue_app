@@ -2,13 +2,12 @@
 import { onMounted } from "vue";
 import { RouterView } from "vue-router";
 import NavbarComponent from "./components/Layout/Navbar/NavbarComponent.vue";
-import { useStoreNotes } from "./stores/storeNotes";
+import { useStoreAuth } from "./stores/storeAuth";
 
-const storeNotes = useStoreNotes();
+const storeAuth = useStoreAuth();
 
-// get notes from the server when the app is mounted
 onMounted(() => {
-    storeNotes.getNotes();
+    storeAuth.init();
 });
 </script>
 

@@ -1,15 +1,39 @@
 import { openToast } from "@/directives/openToast";
-import { type User } from "@/types/types";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut,
+} from "firebase/auth";
 import { defineStore } from "pinia";
 import { auth } from "../firebase/firebase";
 
 export const useStoreAuth = defineStore("storeNotAuth", {
     // initial state
     state: () => ({
-        user: null as User | null,
+        user: {
+            id: "",
+            email: "",
+        },
     }),
     actions: {
+        // onAuthStateChanged
+        init() {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    this.user = {
+                        id: user.uid,
+                        email: user.email ?? "",
+                    };
+                } else {
+                    this.user = {
+                        id: "",
+                        email: "",
+                    };
+                }
+            });
+        },
+
         // sign up
         async signUp(credentials: { email: string; password: string }) {
             try {
