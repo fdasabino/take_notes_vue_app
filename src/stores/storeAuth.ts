@@ -33,6 +33,7 @@ export const useStoreAuth = defineStore("storeAuth", {
                     this.user.id = "";
                     this.user.email = "";
                     this.router.push("/auth");
+                    storeNotes.clearNotes();
                 }
             });
         },

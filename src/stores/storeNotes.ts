@@ -63,6 +63,11 @@ export const useStoreNotes = defineStore("storeNotes", {
             }
         },
 
+        // clear notes
+        clearNotes() {
+            this.notes = [];
+        },
+
         // create
         async createNote(content: string) {
             const generateId = uuidv4();
