@@ -1,0 +1,61 @@
+.auth {
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5rem auto 0 auto;
+
+    .active {
+        border-bottom: 2px solid $base-violet;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid $base-dark-grey;
+
+        &__tab {
+            span {
+                text-transform: uppercase;
+                font-size: 1.2rem;
+                font-weight: 600;
+                cursor: pointer;
+
+                transition: color 0.3s;
+                color: $base-dark;
+
+                &:hover {
+                    color: $base-violet;
+                }
+            }
+        }
+    }
+
+    &__tab {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        border: 1px solid $base-grey;
+        border-radius: 1rem;
+        box-shadow: $base-shadow-2;
+        padding: 2rem;
+
+        &__content {
+            width: 100%;
+
+            h1 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}

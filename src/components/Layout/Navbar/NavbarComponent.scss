@@ -27,9 +27,7 @@
         border: 1px solid rgba($color: $base-blue, $alpha: 0.7);
 
         .active {
-            border: 2px solid $base-violet;
-            border-radius: 16px;
-            padding: 0.5rem;
+            border-bottom: 2px solid $base-violet;
         }
 
         @media screen and (max-width: 768px) {
@@ -88,7 +86,7 @@
                 align-items: center;
                 justify-content: center;
                 gap: 0.2rem;
-                transition: all 0.4s ease-in-out;
+                transition: all 0.2s ease-in-out;
 
                 svg {
                     width: 1rem !important;
@@ -108,7 +106,6 @@
 
                 &:hover {
                     color: $base-violet;
-                    transform: translateY(-2px);
                 }
 
                 @media (max-width: 768px) {
