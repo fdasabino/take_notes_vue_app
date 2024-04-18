@@ -19,6 +19,7 @@ export const useStoreAuth = defineStore("storeAuth", {
             email: "",
         },
     }),
+
     actions: {
         // onAuthStateChanged
         init() {

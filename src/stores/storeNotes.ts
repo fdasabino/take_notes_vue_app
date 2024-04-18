@@ -64,15 +64,6 @@ export const useStoreNotes = defineStore("storeNotes", {
             }
         },
 
-        // clear notes
-        clearNotes() {
-            this.notes = [];
-            // unsubscribe from previous snapshot so that we don't have multiple listeners
-            if (getNotesSnapShot) {
-                getNotesSnapShot();
-            }
-        },
-
         // create
         async createNote(content: string) {
             const generateId = uuidv4();
@@ -111,6 +102,15 @@ export const useStoreNotes = defineStore("storeNotes", {
                 .catch((error) => {
                     openToast(error.message, "error");
                 });
+        },
+
+        // clear notes
+        clearNotes() {
+            this.notes = [];
+            // unsubscribe from previous snapshot so that we don't have multiple listeners
+            if (getNotesSnapShot) {
+                getNotesSnapShot();
+            }
         },
     },
     getters: {
