@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { RouterView } from "vue-router";
+import { RouterView, useRoute } from "vue-router";
 import NavbarComponent from "./components/Layout/Navbar/NavbarComponent.vue";
 import { useStoreAuth } from "./stores/storeAuth";
 
 const storeAuth = useStoreAuth();
+const route = useRoute();
 
 onMounted(() => {
     storeAuth.init();
@@ -12,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <NavbarComponent />
+    <NavbarComponent v-if="route.name !== 'Auth'" />
     <main>
         <RouterView />
     </main>
