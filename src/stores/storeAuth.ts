@@ -1,12 +1,15 @@
 import { openToast } from "@/directives/openToast";
+import { defineStore } from "pinia";
+import { auth } from "../firebase/firebase";
+import { useStoreNotes } from "./storeNotes";
+
+// import firebase auth functions
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
     signInWithEmailAndPassword,
     signOut,
 } from "firebase/auth";
-import { defineStore } from "pinia";
-import { auth } from "../firebase/firebase";
 
 export const useStoreAuth = defineStore("storeAuth", {
     // initial state
@@ -19,11 +22,13 @@ export const useStoreAuth = defineStore("storeAuth", {
     actions: {
         // onAuthStateChanged
         init() {
+            const storeNotes = useStoreNotes();
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     this.user.id = user.uid;
                     this.user.email = user.email ?? "";
                     this.router.push("/");
+                    storeNotes.init();
                 } else {
                     this.user.id = "";
                     this.user.email = "";

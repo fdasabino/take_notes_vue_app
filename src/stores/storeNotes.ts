@@ -4,7 +4,9 @@ import { db } from "@/firebase/firebase";
 import type { Note } from "@/types/types";
 import { defineStore } from "pinia";
 import { v4 as uuidv4 } from "uuid";
+import { useStoreAuth } from "./storeAuth";
 
+// import firebase firestore functions
 import {
     collection,
     deleteDoc,
@@ -16,10 +18,8 @@ import {
     updateDoc,
 } from "firebase/firestore";
 
-const notesCollection = collection(db, "notes");
-
-// "title" is the date and time of the note saved in the database
-const notesCollectionQuery = query(notesCollection, orderBy("title", "desc"));
+let notesCollection = null as any;
+let notesCollectionQuery = null as any;
 
 export const useStoreNotes = defineStore("storeNotes", {
     // initial state
@@ -28,14 +28,21 @@ export const useStoreNotes = defineStore("storeNotes", {
         loading: false,
     }),
     actions: {
+        // init
+        async init() {
+            const storeAuth = useStoreAuth();
+            notesCollection = collection(db, "users", storeAuth.user.id, "notes");
+            notesCollectionQuery = query(notesCollection, orderBy("title", "desc"));
+            await this.getNotes();
+        },
+
         // get
         async getNotes() {
             this.loading = true;
             try {
-                onSnapshot(notesCollectionQuery, (items) => {
+                onSnapshot(notesCollectionQuery, (items: any) => {
                     let tempNotes = [] as Note[];
-
-                    items.forEach((item) => {
+                    items.forEach((item: any) => {
                         const note = {
                             id: item.id,
                             title: item.data().title,
@@ -55,6 +62,7 @@ export const useStoreNotes = defineStore("storeNotes", {
                 return () => clearTimeout(timeout);
             }
         },
+
         // create
         async createNote(content: string) {
             const generateId = uuidv4();
@@ -70,6 +78,7 @@ export const useStoreNotes = defineStore("storeNotes", {
                     openToast(error.message, "error");
                 });
         },
+
         // delete
         async deleteNote(idToDelete: string) {
             await deleteDoc(doc(notesCollection, idToDelete))
@@ -80,6 +89,7 @@ export const useStoreNotes = defineStore("storeNotes", {
                     openToast(error.message, "error");
                 });
         },
+
         // update
         async updateNote(idToUpdate: string, content: string) {
             await updateDoc(doc(notesCollection, idToUpdate), {

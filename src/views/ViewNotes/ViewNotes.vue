@@ -6,7 +6,7 @@ import LoaderComponent from "@/components/Layout/Loader/LoaderComponent.vue";
 import NoteCardComponent from "@/components/Layout/NoteCard/NoteCardComponent.vue";
 import { useStoreNotes } from "@/stores/storeNotes";
 import { FaceFrownIcon, PlusCircleIcon } from "@heroicons/vue/24/outline";
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import "./ViewNotes.scss";
 
 // refs
@@ -36,12 +36,6 @@ const computedMessage = computed(() => {
         return "Click the green button to add you note 👉";
     if (newNote.value.length > 50)
         return "Woo!!! Thats lot to remember, don't forget to save it 😊💡";
-});
-
-// lifecycle hooks
-// get notes from the server when the app is mounted
-onMounted(() => {
-    storeNotes.getNotes();
 });
 </script>
 
