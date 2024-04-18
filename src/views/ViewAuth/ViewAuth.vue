@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import ButtonComponent from "@/components/Layout/Button/ButtonComponent.vue";
-import { ref } from "vue";
+import { openToast } from "@/directives/openToast";
+import { LockClosedIcon, UserPlusIcon } from "@heroicons/vue/24/outline";
+import { reactive, ref } from "vue";
 import "./ViewAuth.scss";
 
 const activeTab = ref(0);
@@ -8,6 +10,25 @@ const activeTab = ref(0);
 const setActiveTab = (tab: number) => {
     console.log(tab);
     activeTab.value = tab;
+};
+
+// Credentials
+const credentials = reactive({
+    email: "",
+    password: "",
+});
+
+const handleSubmit = () => {
+    if (!credentials.email || !credentials.password) {
+        openToast("Please fill in all fields", "error");
+        return;
+    }
+
+    if (activeTab.value === 0) {
+        console.log("Sign In using credentials: ", credentials);
+    } else {
+        console.log("Sign Up using credentials: ", credentials);
+    }
 };
 </script>
 
@@ -35,22 +56,25 @@ const setActiveTab = (tab: number) => {
             ref="activeTab = 0">
             <div class="auth__tab__content">
                 <h1>Sign In</h1>
-                <form>
+                <form @submit.prevent="handleSubmit">
                     <div class="form_input">
                         <input
+                            v-model="credentials.email"
                             type="text"
                             placeholder="Email" />
                     </div>
                     <div class="form_input">
                         <input
+                            v-model="credentials.password"
                             type="password"
                             placeholder="Password" />
                     </div>
                     <ButtonComponent
-                        variant="primary"
-                        type="submit"
-                        >Sign In</ButtonComponent
-                    >
+                        variant="tertiary"
+                        type="submit">
+                        <LockClosedIcon />
+                        Sign In
+                    </ButtonComponent>
                 </form>
             </div>
         </div>
@@ -61,22 +85,25 @@ const setActiveTab = (tab: number) => {
             ref="activeTab = 1">
             <div class="auth__tab__content">
                 <h1>Sign Up</h1>
-                <form>
+                <form @submit.prevent="handleSubmit">
                     <div class="form_input">
                         <input
+                            v-model="credentials.email"
                             type="text"
                             placeholder="Email" />
                     </div>
                     <div class="form_input">
                         <input
+                            v-model="credentials.password"
                             type="password"
                             placeholder="Password" />
                     </div>
                     <ButtonComponent
                         variant="primary"
-                        type="submit"
-                        >Sign Up</ButtonComponent
-                    >
+                        type="submit">
+                        <UserPlusIcon />
+                        Sign Up
+                    </ButtonComponent>
                 </form>
             </div>
         </div>
