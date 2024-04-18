@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import ButtonComponent from "@/components/Layout/Button/ButtonComponent.vue";
 import { openToast } from "@/directives/openToast";
+import { useStoreAuth } from "@/stores/storeAuth";
 import { LockClosedIcon, UserPlusIcon } from "@heroicons/vue/24/outline";
 import { reactive, ref } from "vue";
 import "./ViewAuth.scss";
 
 const activeTab = ref(0);
+const storeAuth = useStoreAuth();
 
 const setActiveTab = (tab: number) => {
     console.log(tab);
@@ -25,9 +27,18 @@ const handleSubmit = () => {
     }
 
     if (activeTab.value === 0) {
-        console.log("Sign In using credentials: ", credentials);
-    } else {
-        console.log("Sign Up using credentials: ", credentials);
+        storeAuth.signInUser(credentials);
+
+        // Reset form
+        credentials.email = "";
+        credentials.password = "";
+    }
+    if (activeTab.value === 1) {
+        storeAuth.signUp(credentials);
+
+        // Reset form
+        credentials.email = "";
+        credentials.password = "";
     }
 };
 </script>

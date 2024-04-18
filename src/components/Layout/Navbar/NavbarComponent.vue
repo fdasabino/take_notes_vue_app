@@ -6,9 +6,13 @@ import {
     PencilIcon,
     PresentationChartBarIcon,
 } from "@heroicons/vue/24/outline";
+
+import { useStoreAuth } from "@/stores/storeAuth";
 import { RouterLink } from "vue-router";
-import ButtonComponent from "../Button/ButtonComponent.vue";
 import "./NavbarComponent.scss";
+
+// store
+const storeAuth = useStoreAuth();
 </script>
 
 <template>
@@ -33,7 +37,7 @@ import "./NavbarComponent.scss";
                 >
                 <div class="wrapper__right__logout">
                     <ArrowLeftStartOnRectangleIcon />
-                    <span>Sign out</span>
+                    <span @click="storeAuth.signOutUser">Sign out</span>
                 </div>
             </div>
         </div>
