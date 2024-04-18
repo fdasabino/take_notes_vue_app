@@ -8,14 +8,14 @@ import ViewStats from "@/views/ViewStats/ViewStats.vue";
 
 const routes = [
     {
-        path: "/",
-        name: "ViewNotes",
-        component: ViewNotes,
-    },
-    {
         path: "/auth",
         name: "Auth",
         component: ViewAuth,
+    },
+    {
+        path: "/",
+        name: "ViewNotes",
+        component: ViewNotes,
     },
     {
         path: "/stats",

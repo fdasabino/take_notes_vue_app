@@ -8,11 +8,21 @@ import {
 } from "@heroicons/vue/24/outline";
 
 import { useStoreAuth } from "@/stores/storeAuth";
+import { watch } from "vue";
 import { RouterLink } from "vue-router";
 import "./NavbarComponent.scss";
 
 // store
 const storeAuth = useStoreAuth();
+const user = storeAuth.$state.user;
+
+watch(
+    () => storeAuth.$state.user,
+    (newUser) => {
+        user.id = newUser.id;
+        user.email = newUser.email;
+    }
+);
 </script>
 
 <template>
@@ -35,9 +45,12 @@ const storeAuth = useStoreAuth();
                     active-class="active"
                     ><PresentationChartBarIcon /> <span>Stats</span></RouterLink
                 >
-                <div class="wrapper__right__logout">
-                    <ArrowLeftStartOnRectangleIcon />
-                    <span @click="storeAuth.signOutUser">Sign out</span>
+                <div
+                    v-if="user.id !== ''"
+                    class="wrapper__right__logout">
+                    <span @click="storeAuth.signOutUser"
+                        >Sign out <small>{{ user.email }}</small></span
+                    >
                 </div>
             </div>
         </div>

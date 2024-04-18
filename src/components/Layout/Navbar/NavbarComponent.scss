@@ -128,32 +128,20 @@
                 cursor: pointer;
                 margin-left: 1rem;
 
-                svg {
-                    width: 1rem !important;
-                    height: 1rem !important;
-
-                    @media (max-width: 480px) {
-                        width: 1.5rem !important;
-                        height: 1.5rem !important;
-                    }
-                }
-
                 span {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
                     font-weight: 600;
+                    font-size: 0.8rem;
+
                     @media (max-width: 480px) {
-                        display: none;
+                        font-size: 0.7rem;
                     }
                 }
 
                 &:hover {
                     color: $base-dark-red;
-                }
-
-                @media (max-width: 768px) {
-                    svg {
-                        width: 0.8rem;
-                        height: 0.8rem;
-                    }
                 }
             }
         }
