@@ -41,11 +41,6 @@ export const useStoreNotes = defineStore("storeNotes", {
         async getNotes() {
             this.loading = true;
             try {
-                // unsubscribe from previous snapshot so that we don't have multiple listeners
-                if (getNotesSnapShot) {
-                    getNotesSnapShot();
-                }
-
                 getNotesSnapShot = onSnapshot(notesCollectionQuery, (items: any) => {
                     let tempNotes = [] as Note[];
                     items.forEach((item: any) => {
@@ -72,6 +67,10 @@ export const useStoreNotes = defineStore("storeNotes", {
         // clear notes
         clearNotes() {
             this.notes = [];
+            // unsubscribe from previous snapshot so that we don't have multiple listeners
+            if (getNotesSnapShot) {
+                getNotesSnapShot();
+            }
         },
 
         // create
