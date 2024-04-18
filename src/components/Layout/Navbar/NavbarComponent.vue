@@ -1,7 +1,13 @@
 <script setup lang="ts">
 // imports
-import { BookOpenIcon, PencilIcon, PresentationChartBarIcon } from "@heroicons/vue/24/outline";
+import {
+    ArrowLeftStartOnRectangleIcon,
+    BookOpenIcon,
+    PencilIcon,
+    PresentationChartBarIcon,
+} from "@heroicons/vue/24/outline";
 import { RouterLink } from "vue-router";
+import ButtonComponent from "../Button/ButtonComponent.vue";
 import "./NavbarComponent.scss";
 </script>
 
@@ -25,6 +31,10 @@ import "./NavbarComponent.scss";
                     active-class="active"
                     ><PresentationChartBarIcon /> <span>Stats</span></RouterLink
                 >
+                <div class="wrapper__right__logout">
+                    <ArrowLeftStartOnRectangleIcon />
+                    <span>Sign out</span>
+                </div>
             </div>
         </div>
     </div>
