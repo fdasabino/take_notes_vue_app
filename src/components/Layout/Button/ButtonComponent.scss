@@ -92,7 +92,7 @@
     &[type="submit"],
     &[type="reset"] {
         @include button-styles;
-        @include button-presets(transparent, $base-grey, $base-blue, $base-white, 0.98, $base-blue);
+        @include button-presets(transparent, $base-blue, $base-blue, $base-white, 0.98, $base-blue);
     }
 }
 
