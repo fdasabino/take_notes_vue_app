@@ -50,7 +50,7 @@ const saveNote = () => {
             <template #button>
                 <ButtonComponent
                     @click="sendMeBack"
-                    variant="secondary">
+                    variant="danger">
                     <BackwardIcon /> Back
                 </ButtonComponent>
                 <ButtonComponent

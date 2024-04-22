@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { TrashIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { vOnClickOutside } from "@vueuse/components";
 import { onKeyStroke } from "@vueuse/core";
 import { defineProps } from "vue";
@@ -52,12 +53,12 @@ onKeyStroke("Escape", () => {
                 <ButtonComponent
                     variant="primary"
                     @click="$props.closeModal">
-                    Cancel
+                    <XMarkIcon /> Cancel
                 </ButtonComponent>
                 <ButtonComponent
                     variant="danger"
                     @click="handleDelete">
-                    Delete
+                    <TrashIcon /> Delete
                 </ButtonComponent>
             </div>
         </div>

@@ -2,7 +2,7 @@
 import "./ButtonComponent.scss";
 
 interface ButtonProps {
-    variant?: "primary" | "secondary" | "tertiary" | "danger" | "google";
+    variant?: "primary" | "success" | "danger" | "google";
     className?: string;
     type?: "button" | "submit" | "reset";
     disabled?: boolean;
@@ -15,8 +15,7 @@ const props = defineProps<ButtonProps>();
 
 const buttonStyles = {
     primary: "btnPrimary",
-    secondary: "btnSecondary",
-    tertiary: "btnTertiary",
+    success: "btnSuccess",
     danger: "btnDanger",
     google: "btnGoogle",
 };

@@ -80,7 +80,7 @@ const handleSubmit = () => {
                             placeholder="Password" />
                     </div>
                     <ButtonComponent
-                        variant="tertiary"
+                        variant="success"
                         type="submit">
                         <LockClosedIcon />
                         Sign In

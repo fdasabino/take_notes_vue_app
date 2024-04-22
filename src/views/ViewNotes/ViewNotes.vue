@@ -53,7 +53,7 @@ const computedMessage = computed(() => {
                     <h3>{{ computedMessage }}</h3>
                 </div>
                 <ButtonComponent
-                    variant="tertiary"
+                    variant="success"
                     @click="addNote(newNote)"
                     :disabled="newNote.length === 0">
                     <PlusCircleIcon /> Add Note
