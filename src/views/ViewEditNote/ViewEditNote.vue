@@ -34,6 +34,8 @@ const saveNote = () => {
 
     return () => clearTimeout(timeout);
 };
+
+const noteLength = computed(() => noteContent.value.length);
 </script>
 
 <template>
@@ -55,7 +57,7 @@ const saveNote = () => {
                 </ButtonComponent>
                 <ButtonComponent
                     @click="saveNote"
-                    :disabled="!noteContent"
+                    :disabled="noteLength === 0"
                     variant="primary">
                     <FolderIcon /> Save Note
                 </ButtonComponent>
